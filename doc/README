@@ -1,0 +1,19 @@
+Mludd's MVC Framework (mmvc) README
+
+1. What is this?
+----------------
+
+MMVC is a simple PHP-based MVC framework.
+
+2. Structure
+----------------
+
+/controllers
+    - This is where controllers go, they should inherit from the base
+      Controller class.
+/models
+    - For all model classes
+/smarty/templates
+    - Put your Smarty templates in this directory
+/Smarty
+    - Included Smarty installation
