@@ -40,8 +40,8 @@ $smarty->setConfigDir('smarty/configs/');
 $smarty->setCacheDir('smarty/cache/');
 
 // Filter input
-$module = preg_replace('/[^a-z0-9]/', '', strtolower($_GET['module']));
+$controller = preg_replace('/[^a-z0-9]/', '', strtolower($_GET['controller']));
 
-$controller = ControllerFactory::get($module, $smarty);
+$controller = ControllerFactory::get($controller, $smarty);
 $controller->display();
 ?>
