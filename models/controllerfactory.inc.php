@@ -23,6 +23,7 @@
  * along with MMVC.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+require_once(dirname(__FILE__)."/config.inc.php");
 require_once(dirname(__FILE__)."/../controllers/controller.inc.php");
 
 /**
@@ -40,32 +41,19 @@ class ControllerFactory {
 	public static function get($controllerName, $smarty) {
 		$controller = new Controller($smarty);
 		$controllerDir = dirname(__FILE__)."/../controllers/";
-		switch($controllerName) {
-			case 'index':
-				require_once($controllerDir."indexcontroller.inc.php");
-				$controller = new IndexController($smarty);
-				break;
-			case 'ajax':
-				require_once($controllerDir."ajaxcontroller.inc.php");
-				$controller = new AjaxController($smarty);
-				break;
-			case 'about':
-				require_once($controllerDir."aboutcontroller.inc.php");
-				$controller = new AboutController($smarty);
-				break;
-			case 'redirect':
-				require_once($controllerDir."redirectcontroller.inc.php");
-				$controller = new RedirectController($smarty);
-				break;
-			case 'statistics':
-				require_once($controllerDir."statisticscontroller.inc.php");
-				$controller = new StatisticsController($smarty);
-				break;
-			default:
-				require_once($controllerDir."filenotfoundcontroller.inc.php");
-				$controller = new FileNotFoundController($smarty);
-				break;
+
+		// We only allow controller names that are alphanumeric
+		$controllerName = preg_replace('/[^a-zA-Z0-9]/', '', $controllerName);
+
+		if(array_key_exists($controllerName, Config::$CONTROLLERS)) {
+			require_once($controllerDir.Config::$CONTROLLERS[$controllerName]['filename']);
+			$controller = new $(Config::$CONTROLLERS[$controllerName]['classname']);
 		}
+		else {
+			require_once($controllerDir.Config::$DEFAULTERRORCONTROLLER['filename']);
+			$controller = new $(Config::$DEFAULTERRORCONTROLLER['classname']);
+		}
+
 
 		return $controller;
 	}

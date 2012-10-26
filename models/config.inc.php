@@ -39,5 +39,18 @@ class Config {
 
 	// Smarty
 	const SMARTY_DIR = '/usr/share/php/smarty3/';
+
+	/**
+	 * The default error controller, used when we can't find the requested controller
+	 */
+	public static DEFAULTERRORCONTROLLER = array('filename' => 'filenotfoundcontroller', 'classname' => 'FileNotFoundController');
+
+	/**
+	 * Add your controllers here.
+	 */
+	public static CONTROLLERS = array(
+		'index' => array('filename' => 'indexcontroller', 'classname' => 'IndexController'),
+		'about' => array('filename' => 'aboutcontroller', 'classname' => 'AboutController')
+	);
 }
 ?>
