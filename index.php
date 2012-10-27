@@ -28,10 +28,10 @@
 require_once(dirname(__FILE__)."/models/config.inc.php");
 require_once(dirname(__FILE__)."/models/controllerfactory.inc.php");
 
-setlocale(LC_ALL, Config::LOCALE);
+setlocale(LC_ALL, Config::$LOCALE);
 
 // Smarty setup
-define("SMARTY_DIR", Config::SMARTY_DIR);
+define("SMARTY_DIR", Config::$SMARTY_DIR);
 require_once(SMARTY_DIR.'Smarty.class.php');
 $smarty = new Smarty();
 $smarty->setTemplateDir('smarty/templates/');
@@ -39,9 +39,15 @@ $smarty->setCompileDir('smarty/templates_c/');
 $smarty->setConfigDir('smarty/configs/');
 $smarty->setCacheDir('smarty/cache/');
 
-// Filter input
-$controller = preg_replace('/[^a-z0-9]/', '', strtolower($_GET['controller']));
+error_log("Controller:".$_GET['controller']);
+error_log("Args: ".$_GET['args']);
 
-$controller = ControllerFactory::get($controller, $smarty);
+// Filter input
+$controllerName = Config::$DEFAULT_CONTROLLER;
+if(isset($_GET['controller'])) {
+	$controllerName = preg_replace('/[^a-z0-9]/', '', strtolower($_GET['controller']));
+}
+
+$controller = ControllerFactory::get($controllerName, $smarty);
 $controller->display();
 ?>

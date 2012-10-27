@@ -30,27 +30,28 @@
  * @copyright Copyright (c) 2012 Mikael Jacobson
  */
 class Config {
-	const LOCALE = "sv_SE.UTF-8";
+	public static $LOCALE = "sv_SE.UTF-8";
 
 	// Database settings
-	const DB_DSN = 'mysql:host=yourhostname;dbname=shorturl';
-	const DB_PASSWORD = 'password';
-	const DB_USER = 'username';
+	public static $DB_DSN = 'mysql:host=yourhostname;dbname=shorturl';
+	public static $DB_PASSWORD = 'password';
+	public static $DB_USER = 'username';
 
 	// Smarty
-	const SMARTY_DIR = '/usr/share/php/smarty3/';
+	public static $SMARTY_DIR = '/usr/share/php/smarty3/';
 
 	/**
 	 * The default error controller, used when we can't find the requested controller
 	 */
-	public static DEFAULTERRORCONTROLLER = array('filename' => 'filenotfoundcontroller', 'classname' => 'FileNotFoundController');
+	public static $DEFAULTERRORCONTROLLER = array('filename' => 'filenotfoundcontroller.inc.php', 'classname' => 'FileNotFoundController');
 
 	/**
 	 * Add your controllers here.
 	 */
-	public static CONTROLLERS = array(
-		'index' => array('filename' => 'indexcontroller', 'classname' => 'IndexController'),
-		'about' => array('filename' => 'aboutcontroller', 'classname' => 'AboutController')
+	public static $DEFAULT_CONTROLLER = 'index';
+	public static $CONTROLLERS = array(
+		'index' => array('filename' => 'indexcontroller.inc.php', 'classname' => 'IndexController'),
+		'about' => array('filename' => 'aboutcontroller.inc.php', 'classname' => 'AboutController')
 	);
 }
 ?>

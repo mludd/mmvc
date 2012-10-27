@@ -47,11 +47,13 @@ class ControllerFactory {
 
 		if(array_key_exists($controllerName, Config::$CONTROLLERS)) {
 			require_once($controllerDir.Config::$CONTROLLERS[$controllerName]['filename']);
-			$controller = new $(Config::$CONTROLLERS[$controllerName]['classname']);
+			$classname = Config::$CONTROLLERS[$controllerName]['classname'];
+			$controller = new $classname($smarty);
 		}
 		else {
 			require_once($controllerDir.Config::$DEFAULTERRORCONTROLLER['filename']);
-			$controller = new $(Config::$DEFAULTERRORCONTROLLER['classname']);
+			$classname = Config::$DEFAULTERRORCONTROLLER['classname'];
+			$controller = new $classname($smarty);
 		}
 
 

@@ -73,16 +73,17 @@ class ResourceManager {
 	private static function _init_resource($resource, $options = null) {
 		if($resource === 'db') {
 			try {
-				self::$db = new PDO(Config::DB_DSN, Config::DB_USER,
-					Config::DB_PASSWORD);
+				self::$db = new PDO(Config::$DB_DSN, Config::$DB_USER,
+					Config::$DB_PASSWORD);
 			}
 			catch(PDOException $pe) {
 				echo "Database connection failed!\n".$pe->getMessage();
 			}
 		}
-		else if(class_exists($resource) &&
-				property_exists('ResourceManager', $resource)) {
-			self::$$resource = new $resource($options);
+		else if(
+			class_exists($resource) &&
+			property_exists('ResourceManager', $resource)) {
+				self::$$resource = new $resource($options);
 		}
 	}
 }

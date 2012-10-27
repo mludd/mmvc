@@ -5,6 +5,7 @@ Mludd's MVC Framework (mmvc) README
 
 MMVC is a simple PHP-based MVC framework.
 
+
 2. Structure
 ----------------
 
@@ -17,3 +18,7 @@ MMVC is a simple PHP-based MVC framework.
     - Put your Smarty templates in this directory
 /Smarty
     - Included Smarty installation
+
+
+3. Building your own sites
+----------------
