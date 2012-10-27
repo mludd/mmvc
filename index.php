@@ -39,13 +39,14 @@ $smarty->setCompileDir('smarty/templates_c/');
 $smarty->setConfigDir('smarty/configs/');
 $smarty->setCacheDir('smarty/cache/');
 
-error_log("Controller:".$_GET['controller']);
-error_log("Args: ".$_GET['args']);
-
 // Filter input
 $controllerName = Config::$DEFAULT_CONTROLLER;
 if(isset($_GET['controller'])) {
 	$controllerName = preg_replace('/[^a-z0-9]/', '', strtolower($_GET['controller']));
+}
+$args = array();
+if(isset($_GET['args'])) {
+	$args = preg_split('/\//', $_GET['args']);
 }
 
 $controller = ControllerFactory::get($controllerName, $smarty);
