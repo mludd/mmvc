@@ -40,18 +40,29 @@ class Config {
 	// Smarty
 	public static $SMARTY_DIR = '/usr/share/php/smarty3/';
 
+	public static $DEFAULT_DATATYPE = "smarty"; // Valid values: 'smarty', 'json'
+
 	/**
 	 * The default error controller, used when we can't find the requested controller
 	 */
-	public static $DEFAULTERRORCONTROLLER = array('filename' => 'filenotfoundcontroller.inc.php', 'classname' => 'FileNotFoundController');
+	public static $DEFAULTERRORCONTROLLER = array(
+		'filename' => 'filenotfoundcontroller.inc.php',
+		'templatefile' => '404.tpl',
+		'classname' => 'FileNotFoundController');
 
 	/**
 	 * Add your controllers here.
 	 */
 	public static $DEFAULT_CONTROLLER = 'index';
 	public static $CONTROLLERS = array(
-		'index' => array('filename' => 'indexcontroller.inc.php', 'classname' => 'IndexController'),
-		'about' => array('filename' => 'aboutcontroller.inc.php', 'classname' => 'AboutController')
+		'index' => array(
+			'filename' => 'indexcontroller.inc.php',
+			'templatefile' => 'index.tpl',
+			'classname' => 'IndexController'),
+		'about' => array(
+			'filename' => 'aboutcontroller.inc.php',
+			'templatefile' => 'about.tpl',
+			'classname' => 'AboutController')
 	);
 }
 ?>

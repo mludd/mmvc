@@ -24,6 +24,8 @@
  * along with MMVC.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+require_once(dirname(__FILE__)."/../models/config.inc.php");
+
 /**
  * Controller base class
  * @author Mikael Jacobson <mikael@mludd.se>
@@ -64,8 +66,8 @@ class Controller {
 	 */
 	public function __construct($template) {
 		$this->_template = $template;
-		$this->_templateFile = "index.tpl"; // Our default template file
-		$this->_dataType = "smarty";
+		$this->_templateFile = Config::$CONTROLLERS[Config::$DEFAULT_CONTROLLER]['templatefile'];
+		$this->_dataType = Config::$DEFAULT_DATATYPE;
 		$this->_securityLevel = 0;
 		$this->process();
 	}
