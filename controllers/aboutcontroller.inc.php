@@ -34,7 +34,7 @@ class AboutController extends Controller {
 	/**
 	 * Performs page rendering logic
 	 */
-	protected function process() {
+	protected function indexAction() {
 		$this->_templateFile = 'about.tpl';
 	}
 }

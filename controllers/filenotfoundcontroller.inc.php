@@ -35,7 +35,7 @@ class FileNotFoundController extends Controller {
 	/**
 	 * Handles page display logic
 	 */
-	protected function process() {
+	protected function indexAction() {
 		header('HTTP/1.0 404 Not Found');
 		$this->_templateFile = '404.tpl';
 	}

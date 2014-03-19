@@ -69,20 +69,24 @@ class Controller {
 		$this->_templateFile = Config::$CONTROLLERS[Config::$DEFAULT_CONTROLLER]['templatefile'];
 		$this->_dataType = Config::$DEFAULT_DATATYPE;
 		$this->_securityLevel = 0;
-		$this->process();
 	}
 
 	/**
 	 * This is the main function that processes input and sets all
 	 * properties for the smarty template.
+	 * @param string $action Action to run
 	 */
-	protected function process() {
+	protected function process($action) {
+		$methodName = $action."Action";
+		$this->{$methodName}();
 	}
 
 	/**
 	 * Displays the view
+	 * @param string $action Action to run before outputting.
 	 */
-	public function display() {
+	public function display($action) {
+		$this->process($action);
 		if($this->_dataType == "smarty") {
 			$this->_template->display($this->_templateFile);
 		}

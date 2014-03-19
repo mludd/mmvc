@@ -20,7 +20,25 @@ MMVC is a simple PHP-based MVC framework.
     - Included Smarty installation
 
 
+2b. URL and controller anatomy
+----------------
+
+A normal URL to a view in MMVC looks something like this:
+http://example.com/controller/action/arguments
+
+Each action is defined as a function in your controller, the
+default action if one is not specified is the 'index' action, the method
+for this action is 'indexAction()'.
+
+If you want to add other actions to your controllers you just name the
+methods accordingly. That is, the name of your method should be the name
+of your action followed by 'Action'.
+
+
 3. Building your own sites
 ----------------
 
+MMVC is of course meant to be used to quickly deploy your own sites.
 
+The first thing you'll want to do is probably to replace the default templates
+with your own pages.

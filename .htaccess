@@ -12,4 +12,5 @@ RewriteRule ^(smarty|models|controllers)(/.*)$ /index.php?controller=404 [L]
 # Redirect all requests for nonexistent files to dispatcher
 RewriteCond %{SCRIPT_FILENAME} !-f
 RewriteCond %{SCRIPT_FILENAME} !-d
-RewriteRule ^([^/]+)(/*)(.*)$ /index.php?controller=$1&args=$3 [L]
+RewriteRule ^([^/]+)(/*)([^/]*)(/*)(.*)$ /index.php?controller=$1&action=$3&args=$5 [L]
+#RewriteRule ^([^/]+)(/*)(.*)$ /index.php?controller=$1&args=$3 [L]
