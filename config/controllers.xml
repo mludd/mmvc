@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<config>
+	<!-- defaultController is the default when no other controller is
+	     applicable. -->
+	<defaultController>index</defaultController>
+	<fileNotFoundController>
+		<controller>
+			<template>404.tpl</template>
+			<classfile>filenotfoundcontroller.inc.php</classfile>
+			<classname>FileNotFoundController</classname>
+		</controller>
+	</fileNotFoundController>
+	<controllers>
+		<controller>
+			<name>index</name>
+			<template>index.tpl</template>
+			<classfile>indexcontroller.inc.php</classfile>
+			<classname>IndexController</classname>
+		</controller>
+		<controller>
+			<name>about</name>
+			<template>about.tpl</template>
+			<classfile>aboutcontroller.inc.php</classfile>
+			<classname>AboutController</classname>
+		</controller>
+	</controllers>
+</config>

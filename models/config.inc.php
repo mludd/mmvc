@@ -30,39 +30,81 @@
  * @copyright Copyright (c) 2012 Mikael Jacobson
  */
 class Config {
-	public static $LOCALE = "sv_SE.UTF-8";
+	/**
+	 * Default constructor, loads configuration XML and populates
+	 * the object with the data
+	 */
+	public function __construct() {
+		$this->loadGeneralConfiguration('general.xml');
+		$this->loadControllerConfiguration('controllers.xml');
+		$this->loadDbConfiguration('db.xml');
+	}
 
-	// Database settings
-	public static $DB_DSN = 'mysql:host=yourhostname;dbname=shorturl';
-	public static $DB_PASSWORD = 'password';
-	public static $DB_USER = 'username';
+	private function loadGeneralConfiguration($filename) {
+		$xml = $this->getConfigXml($filename);
 
-	// Smarty
-	public static $SMARTY_DIR = '/usr/share/php/smarty3/';
-
-	public static $DEFAULT_DATATYPE = "smarty"; // Valid values: 'smarty', 'json'
+		$this->locale		= (string)$xml->locale;
+		$this->smartyDir	= (string)$xml->smarty_dir;
+		$this->defaultDatatype	= (string)$xml->default_datatype;
+	}
 
 	/**
-	 * The default error controller, used when we can't find the requested controller
+	 * Attempts to load the configuration for the database
+	 *
+	 * @param string $filename File to load configuration from
 	 */
-	public static $DEFAULTERRORCONTROLLER = array(
-		'filename' => 'filenotfoundcontroller.inc.php',
-		'templatefile' => '404.tpl',
-		'classname' => 'FileNotFoundController');
+	private function loadDbConfiguration($filename) {
+		$xml = $this->getConfigXml($filename);
+
+		$this->dbDsn	= (string)$xml->db_dsn;
+		$this->dbUser	= (string)$xml->db_username;
+		$this->dbPass	= (string)$xml->db_password;
+	}
 
 	/**
-	 * Add your controllers here.
+	 * Attempts to load the configuration for the controllers
+	 *
+	 * @param string $filename File to load configuration from
 	 */
-	public static $DEFAULT_CONTROLLER = 'index';
-	public static $CONTROLLERS = array(
-		'index' => array(
-			'filename' => 'indexcontroller.inc.php',
-			'templatefile' => 'index.tpl',
-			'classname' => 'IndexController'),
-		'about' => array(
-			'filename' => 'aboutcontroller.inc.php',
-			'templatefile' => 'about.tpl',
-			'classname' => 'AboutController')
-	);
+	private function loadControllerConfiguration($filename) {
+		$controllerXml = $this->getConfigXml($filename);
+
+		// controllers
+		$this->controllers = [];
+		foreach($controllerXml->controllers->controller as $_cont) {
+			$this->controllers[(string)$_cont->name] = $this->xmlControllerToArray($_cont);
+		}
+
+		// 404
+		$this->fileNotFoundController = $this->xmlControllerToArray($controllerXml->fileNotFoundController->controller);
+
+		// Default controller
+		$this->defaultController = (string)$controllerXml->defaultController;
+	}
+
+	/**
+	 * Returns a config file as a SimpleXMLElement object
+	 *
+	 * @param string $filename File to load configuration from
+	 * @return SimplXMLElement
+	 */
+	private function getConfigXml($filename) {
+		return new SimpleXMLElement(file_get_contents(dirname(__FILE__)."/../config/".$filename));
+	}
+
+	/**
+	 * Converts a SimpleXMLElement Controller into an array
+	 *
+	 * @param SimpleXMLElement $controller Controller XML Element
+	 * @return array
+	 */
+	private function xmlControllerToArray($controller) {
+		return [
+			'templatefile'	=> (string)$controller->template,
+			'filename'	=> (string)$controller->classfile,
+			'classname'	=> (string)$controller->classname
+			
+		];
+	}
 }
 ?>

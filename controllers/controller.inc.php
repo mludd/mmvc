@@ -24,7 +24,8 @@
  * along with MMVC.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once(dirname(__FILE__)."/../models/config.inc.php");
+//require_once(dirname(__FILE__)."/../models/config.inc.php");
+require_once(dirname(__FILE__)."/../models/resourcemanager.inc.php");
 
 /**
  * Controller base class
@@ -65,9 +66,10 @@ class Controller {
 	 * @param Smarty $template Smarty template object
 	 */
 	public function __construct($template) {
+		$config = ResourceManager::get('config');
 		$this->_template = $template;
-		$this->_templateFile = Config::$CONTROLLERS[Config::$DEFAULT_CONTROLLER]['templatefile'];
-		$this->_dataType = Config::$DEFAULT_DATATYPE;
+		$this->_templateFile = $config->controllers[$config->defaultController]['templatefile'];
+		$this->_dataType = $config->defaultDatatype;
 		$this->_securityLevel = 0;
 	}
 

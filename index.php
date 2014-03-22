@@ -9,7 +9,7 @@
 /*
  * This file is part of Mludd's MVC Framework (MMVC).
  *
- * Copyright (C) 2012 Mikael Jacobson <mikael@mludd.se>
+ * Copyright (C) 2012-2014 Mikael Jacobson <mikael@mludd.se>
  *
  * MMVC is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,13 +25,16 @@
  * along with MMVC.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once(dirname(__FILE__)."/models/config.inc.php");
+//require_once(dirname(__FILE__)."/models/config.inc.php");
+require_once(dirname(__FILE__)."/models/resourcemanager.inc.php");
 require_once(dirname(__FILE__)."/models/controllerfactory.inc.php");
 
-setlocale(LC_ALL, Config::$LOCALE);
+$config = ResourceManager::get('config');
+
+setlocale(LC_ALL, $config->locale);
 
 // Smarty setup
-define("SMARTY_DIR", Config::$SMARTY_DIR);
+define("SMARTY_DIR", $config->smartyDir);
 require_once(SMARTY_DIR.'Smarty.class.php');
 $smarty = new Smarty();
 $smarty->setTemplateDir('smarty/templates/');
@@ -40,7 +43,7 @@ $smarty->setConfigDir('smarty/configs/');
 $smarty->setCacheDir('smarty/cache/');
 
 // Filter input
-$controllerName = Config::$DEFAULT_CONTROLLER;
+$controllerName = $config->defaultController;
 $action = 'index';
 if(isset($_GET['controller'])) {
 	$controllerName = preg_replace('/[^a-z0-9]/', '', strtolower($_GET['controller']));

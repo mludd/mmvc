@@ -7,7 +7,7 @@ RewriteRule ^(.+)/+$ http://%{HTTP_HOST}/$1 [R=301,L]
 
 # Hide some stuff the visitors don't need to see (default directories
 # for parts of the framework)
-RewriteRule ^(smarty|models|controllers)(/.*)$ /index.php?controller=404 [L]
+RewriteRule ^(smarty|models|controllers|config)(/.*)$ /index.php?controller=404 [L]
 
 # Redirect all requests for nonexistent files to dispatcher
 RewriteCond %{SCRIPT_FILENAME} !-f

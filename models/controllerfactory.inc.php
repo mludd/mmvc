@@ -23,7 +23,8 @@
  * along with MMVC.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once(dirname(__FILE__)."/config.inc.php");
+//require_once(dirname(__FILE__)."/config.inc.php");
+require_once(dirname(__FILE__)."/resourcemanager.inc.php");
 require_once(dirname(__FILE__)."/../controllers/controller.inc.php");
 
 /**
@@ -39,20 +40,21 @@ class ControllerFactory {
 	 * @return mixed Controller
 	 */
 	public static function get($controllerName, $smarty) {
-		$controller = new Controller($smarty);
-		$controllerDir = dirname(__FILE__)."/../controllers/";
+		$config		= ResourceManager::get('config');
+		$controller	= new Controller($smarty);
+		$controllerDir	= dirname(__FILE__)."/../controllers/";
 
 		// We only allow controller names that are alphanumeric
 		$controllerName = preg_replace('/[^a-zA-Z0-9]/', '', $controllerName);
 
-		if(array_key_exists($controllerName, Config::$CONTROLLERS)) {
-			require_once($controllerDir.Config::$CONTROLLERS[$controllerName]['filename']);
-			$classname = Config::$CONTROLLERS[$controllerName]['classname'];
+		if(array_key_exists($controllerName, $config->controllers)) {
+			require_once($controllerDir.$config->controllers[$controllerName]['filename']);
+			$classname = $config->controllers[$controllerName]['classname'];
 			$controller = new $classname($smarty);
 		}
 		else {
-			require_once($controllerDir.Config::$DEFAULTERRORCONTROLLER['filename']);
-			$classname = Config::$DEFAULTERRORCONTROLLER['classname'];
+			require_once($controllerDir.$config->fileNotFoundController['filename']);
+			$classname = $config->fileNotFoundController['classname'];
 			$controller = new $classname($smarty);
 		}
 

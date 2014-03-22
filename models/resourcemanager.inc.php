@@ -72,9 +72,13 @@ class ResourceManager {
 	 */
 	private static function _init_resource($resource, $options = null) {
 		if($resource === 'db') {
+			$config = self::get('config');
 			try {
-				self::$db = new PDO(Config::$DB_DSN, Config::$DB_USER,
-					Config::$DB_PASSWORD);
+				self::$db = new PDO(
+					$config->dbDsn,
+					$config->dbUser,
+					$config->dbPass	
+				);
 			}
 			catch(PDOException $pe) {
 				echo "Database connection failed!\n".$pe->getMessage();
