@@ -9,6 +9,11 @@ MMVC is a simple PHP-based MVC framework.
 2. Structure
 ----------------
 
+/config:
+    Contains all configuration files. The configuration is stored in XML
+    files. Currently if you want to use a configuration file other than
+    the default ones you need to edit models/config.inc.php to make it
+    read the file(s). A fix for this is forthcoming.
 /controllers
     - This is where controllers go, they should inherit from the base
       Controller class.
@@ -33,6 +38,23 @@ for this action is 'indexAction()'.
 If you want to add other actions to your controllers you just name the
 methods accordingly. That is, the name of your method should be the name
 of your action followed by 'Action'.
+
+
+2c. Models
+----------------
+
+Models in MMVC are fairly barebones, there's not even a parent 'Model' class
+right now.
+
+The models that come with MMVC are very few:
+
+Config:
+    Handles configuration files, reading from XML files and such things.
+ControllerFactory:
+    Used by the dispatcher to load controllers.
+ResourceManager:
+    Used for database connections and config objects by default but can be
+    extended to handle other things.
 
 
 3. Building your own sites
