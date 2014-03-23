@@ -36,26 +36,43 @@ class ControllerFactory {
 	/**
 	 * Handles requests for a new controller
 	 * @param string $controllerName Name of controller
+	 * @param string $action Controller action
+	 * @param array $args GET arguments
 	 * @param Smarty $smarty Smarty object to pass to controller
 	 * @return mixed Controller
 	 */
-	public static function get($controllerName, $smarty) {
+	public static function get($controllerName, $action, $args, $smarty) {
 		$config		= ResourceManager::get('config');
-		$controller	= new Controller($smarty);
+		$controller	= new Controller($action, $args, $smarty);
 		$controllerDir	= dirname(__FILE__)."/../controllers/";
 
 		// We only allow controller names that are alphanumeric
 		$controllerName = preg_replace('/[^a-zA-Z0-9]/', '', $controllerName);
 
+
 		if(array_key_exists($controllerName, $config->controllers)) {
 			require_once($controllerDir.$config->controllers[$controllerName]['filename']);
-			$classname = $config->controllers[$controllerName]['classname'];
-			$controller = new $classname($smarty);
+
+			if(method_exists($config->controllers[$controllerName]['classname'], $action."Action")) {
+				$classname = $config->controllers[$controllerName]['classname'];
+				$controller = new $classname($action, $args, $smarty);
+			}
+			else {
+				// User is requesting action which does not exist
+				$action = "code";
+				$args = array("404");
+				require_once($controllerDir.$config->fileNotFoundController['filename']);
+				$classname = $config->fileNotFoundController['classname'];
+				$controller = new $classname($action, $args, $smarty);
+			}
 		}
 		else {
+			// User is requesting controller which does not exist
+			$action = "code";
+			$args = array("404");
 			require_once($controllerDir.$config->fileNotFoundController['filename']);
 			$classname = $config->fileNotFoundController['classname'];
-			$controller = new $classname($smarty);
+			$controller = new $classname($action, $args, $smarty);
 		}
 
 

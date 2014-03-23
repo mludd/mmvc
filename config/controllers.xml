@@ -6,8 +6,8 @@
 	<fileNotFoundController>
 		<controller>
 			<template>404.tpl</template>
-			<classfile>filenotfoundcontroller.inc.php</classfile>
-			<classname>FileNotFoundController</classname>
+			<classfile>errorcontroller.inc.php</classfile>
+			<classname>ErrorController</classname>
 		</controller>
 	</fileNotFoundController>
 	<controllers>

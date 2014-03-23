@@ -57,6 +57,6 @@ if(isset($_GET['args'])) {
 	$args = preg_split('/\//', $_GET['args']);
 }
 
-$controller = ControllerFactory::get($controllerName, $smarty);
-$controller->display($action);
+$controller = ControllerFactory::get($controllerName, $action, $args, $smarty);
+$controller->display();
 ?>

@@ -31,13 +31,29 @@ require_once(dirname(__FILE__)."/controller.inc.php");
  * Returns a 404 error. 
  * @author Mikael Jacobson <mikael@mludd.se>
  */
-class FileNotFoundController extends Controller {
+class ErrorController extends Controller {
 	/**
 	 * Handles page display logic
 	 */
 	protected function indexAction() {
-		header('HTTP/1.0 404 Not Found');
-		$this->_templateFile = '404.tpl';
+		$this->codeAction();
+	}
+
+	public function codeAction() {
+		$code = "500";
+		if(isset($this->_args[0]) && is_numeric($this->_args[0])) {
+			if($this->_args[0] == "403") {
+				$code = "403";
+			}
+			else if($this->_args[0] == "404") {
+				$code = "404";
+			}
+			else if($this->_args[0] == "500") {
+				$code = "500";
+			}
+		}
+		http_response_code($code);
+		$this->_templateFile = $code.'.tpl';
 	}
 }
 ?>

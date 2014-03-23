@@ -62,15 +62,32 @@ class Controller {
 	protected $_securityLevel;
 
 	/**
+	 * Controller action
+	 * @var string
+	 * @access protected
+	 */
+	protected $_action;
+
+	/**
+	 * GET arguments
+	 * @var array
+	 * @access protected
+	 */
+	protected $_args;
+
+	/**
 	 * Default constructor
 	 * @param Smarty $template Smarty template object
+	 * @param array $args GET arguments
 	 */
-	public function __construct($template) {
+	public function __construct($action, $args, $template) {
 		$config = ResourceManager::get('config');
 		$this->_template = $template;
 		$this->_templateFile = $config->controllers[$config->defaultController]['templatefile'];
 		$this->_dataType = $config->defaultDatatype;
 		$this->_securityLevel = 0;
+		$this->_action = $action;
+		$this->_args = $args;
 	}
 
 	/**
@@ -87,8 +104,8 @@ class Controller {
 	 * Displays the view
 	 * @param string $action Action to run before outputting.
 	 */
-	public function display($action) {
-		$this->process($action);
+	public function display() {
+		$this->process($this->_action);
 		if($this->_dataType == "smarty") {
 			$this->_template->display($this->_templateFile);
 		}
