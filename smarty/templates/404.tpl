@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>404/Not Found - MMVC</title>
+		<title>404/Not Found - siphMVC</title>
 	</head>
 	<body>
 		<h1>404/File Not Found</h1>

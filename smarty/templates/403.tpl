@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>403/Forbidden - MMVC</title>
+		<title>403/Forbidden - siphMVC</title>
 	</head>
 	<body>
 		<h1>403/Forbidden</h1>
