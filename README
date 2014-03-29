@@ -43,8 +43,8 @@ of your action followed by 'Action'.
 2c. Models
 ----------------
 
-Models in siphMVC are fairly barebones, there's not even a parent 'Model' class
-right now.
+Models in siphMVC are fairly barebones, while there is an abstract parent
+'Model' class it currently contains nothing of value, at all.
 
 The models that come with siphMVC are very few:
 
