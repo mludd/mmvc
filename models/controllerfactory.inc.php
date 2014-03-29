@@ -24,15 +24,16 @@
  */
 
 //require_once(dirname(__FILE__)."/config.inc.php");
+require_once(dirname(__FILE__)."/abstract/model.inc.php");
 require_once(dirname(__FILE__)."/resourcemanager.inc.php");
 require_once(dirname(__FILE__)."/../controllers/controller.inc.php");
 
 /**
  * Controller factory class
  * @author Mikael Jacobson <mikael@mludd.se>
- * @copyright Copyright (c) 2012 Mikael Jacobson
+ * @copyright Copyright (c) 2012-2014 Mikael Jacobson
  */
-class ControllerFactory {
+class ControllerFactory extends Model {
 	/**
 	 * Handles requests for a new controller
 	 * @param string $controllerName Name of controller

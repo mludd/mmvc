@@ -2,7 +2,7 @@
 /**
  * Contains Controller base class
  * @package Default
- * @license http://s.mludd.se/COPYING GNU General Public License
+ * @license http://siphmvc.mludd.se/COPYING GNU General Public License
  */
 
 /*

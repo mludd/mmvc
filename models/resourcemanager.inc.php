@@ -1,7 +1,7 @@
 <?php
 /**
  * Contains ResourceManager class
- * @license http://mvc.mludd.se/COPYING GNU General Public License
+ * @license http://siphmvc.mludd.se/COPYING GNU General Public License
  * @package Default
  */
 
@@ -24,15 +24,16 @@
  * along with siphMVC.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+require_once(dirname(__FILE__)."/abstract/model.inc.php");
 require_once(dirname(__FILE__)."/config.inc.php");
 
 /**
  * Manages resource singletons, in practice just the db connection,
  * should probably be joined with ControllerFactory
  * @author Mikael Jacobson <mikael@mludd.se>
- * @copyright Copyright (c) 2012 Mikael Jacobson
+ * @copyright Copyright (c) 2012-2014 Mikael Jacobson
  */
-class ResourceManager {
+class ResourceManager extends Model {
 	/**
 	 * Database connection singleton
 	 * @var PDO
