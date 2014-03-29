@@ -43,10 +43,10 @@ $smarty->setConfigDir('smarty/configs/');
 $smarty->setCacheDir('smarty/cache/');
 
 // Filter input
-$controllerName = $config->defaultController;
+$route = $config->defaultController;
 $action = 'index';
 if(isset($_GET['controller'])) {
-	$controllerName = preg_replace('/[^a-z0-9]/', '', strtolower($_GET['controller']));
+	$route = preg_replace('/[^a-z0-9]/', '', strtolower($_GET['controller']));
 }
 if(isset($_GET['action']) && !empty($_GET['action'])) {
 	$action = preg_replace('/[^a-zA-Z0-9]/', '', $_GET['action']);
@@ -57,6 +57,6 @@ if(isset($_GET['args'])) {
 	$args = preg_split('/\//', $_GET['args']);
 }
 
-$controller = ControllerFactory::get($controllerName, $action, $args, $smarty);
+$controller = ControllerFactory::get($route, $action, $args, $smarty);
 $controller->display();
 ?>

@@ -38,7 +38,8 @@ class Config extends Model {
 	 */
 	public function __construct() {
 		$this->loadGeneralConfiguration('general.xml');
-		$this->loadControllerConfiguration('controllers.xml');
+		//$this->loadControllerConfiguration('controllers.xml');
+		$this->loadControllers('controllers.xml');
 		$this->loadDbConfiguration('db.xml');
 	}
 
@@ -68,20 +69,20 @@ class Config extends Model {
 	 *
 	 * @param string $filename File to load configuration from
 	 */
-	private function loadControllerConfiguration($filename) {
-		$controllerXml = $this->getConfigXml($filename);
+	private function loadControllers($filename) {
+		$routeXml = $this->getConfigXml($filename);
 
 		// controllers
-		$this->controllers = [];
-		foreach($controllerXml->controllers->controller as $_cont) {
-			$this->controllers[(string)$_cont->name] = $this->xmlControllerToArray($_cont);
+		$this->routes = [];
+		foreach($routeXml->routes->route as $_cont) {
+			$this->routes[(string)$_cont->path] = $this->xmlControllerToArray($_cont);
 		}
 
 		// 404
-		$this->fileNotFoundController = $this->xmlControllerToArray($controllerXml->fileNotFoundController->controller);
+		$this->fileNotFoundController = $this->xmlControllerToArray($routeXml->fileNotFoundController->controller);
 
 		// Default controller
-		$this->defaultController = (string)$controllerXml->defaultController;
+		$this->defaultRoute = (string)$routeXml->defaultRoute;
 	}
 
 	/**
@@ -101,6 +102,7 @@ class Config extends Model {
 	 * @return array
 	 */
 	private function xmlControllerToArray($controller) {
+		error_log(print_r($controller, true));
 		return [
 			'templatefile'	=> (string)$controller->template,
 			'filename'	=> (string)$controller->classfile,

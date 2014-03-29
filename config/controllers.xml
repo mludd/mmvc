@@ -2,7 +2,7 @@
 <config>
 	<!-- defaultController is the default when no other controller is
 	     applicable. -->
-	<defaultController>index</defaultController>
+	<defaultRoute>index</defaultController>
 	<fileNotFoundController>
 		<controller>
 			<template>404.tpl</template>
@@ -10,18 +10,30 @@
 			<classname>ErrorController</classname>
 		</controller>
 	</fileNotFoundController>
-	<controllers>
-		<controller>
-			<name>index</name>
-			<template>index.tpl</template>
-			<classfile>indexcontroller.inc.php</classfile>
-			<classname>IndexController</classname>
-		</controller>
-		<controller>
-			<name>about</name>
-			<template>about.tpl</template>
-			<classfile>aboutcontroller.inc.php</classfile>
-			<classname>AboutController</classname>
-		</controller>
-	</controllers>
+	<routes>
+		<route>
+			<path>index</path>
+			<controller>
+				<template>index.tpl</template>
+				<classfile>indexcontroller.inc.php</classfile>
+				<classname>IndexController</classname>
+			</controller>
+		</route>
+		<route>
+			<path>about</path>
+			<controller>
+				<template>about.tpl</template>
+				<classfile>aboutcontroller.inc.php</classfile>
+				<classname>AboutController</classname>
+			</controller>
+		</route>
+		<route>
+			<path>error</path>
+			<controller>
+				<template>404.tpl</template>
+				<classfile>errorcontroller.inc.php</classfile>
+				<classname>ErrorController</classname>
+			</controller>
+		</route>
+	</routes>
 </config>

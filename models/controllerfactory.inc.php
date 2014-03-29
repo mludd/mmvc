@@ -36,26 +36,26 @@ require_once(dirname(__FILE__)."/../controllers/controller.inc.php");
 class ControllerFactory extends Model {
 	/**
 	 * Handles requests for a new controller
-	 * @param string $controllerName Name of controller
+	 * @param string $route Name of route
 	 * @param string $action Controller action
 	 * @param array $args GET arguments
 	 * @param Smarty $smarty Smarty object to pass to controller
 	 * @return mixed Controller
 	 */
-	public static function get($controllerName, $action, $args, $smarty) {
+	public static function get($route, $action, $args, $smarty) {
 		$config		= ResourceManager::get('config');
 		$controller	= new Controller($action, $args, $smarty);
 		$controllerDir	= dirname(__FILE__)."/../controllers/";
 
 		// We only allow controller names that are alphanumeric
-		$controllerName = preg_replace('/[^a-zA-Z0-9]/', '', $controllerName);
+		$route = preg_replace('/[^a-zA-Z0-9]/', '', $route);
 
 
-		if(array_key_exists($controllerName, $config->controllers)) {
-			require_once($controllerDir.$config->controllers[$controllerName]['filename']);
+		if(array_key_exists($route, $config->controllers)) {
+			require_once($controllerDir.$config->controllers[$route]['filename']);
 
-			if(method_exists($config->controllers[$controllerName]['classname'], $action."Action")) {
-				$classname = $config->controllers[$controllerName]['classname'];
+			if(method_exists($config->controllers[$route]['classname'], $action."Action")) {
+				$classname = $config->controllers[$route]['classname'];
 				$controller = new $classname($action, $args, $smarty);
 			}
 			else {
