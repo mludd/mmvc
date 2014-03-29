@@ -35,6 +35,7 @@ class IndexController extends Controller {
 	 * Performs page rendering logic
 	 */
 	protected function indexAction() {
+		$this->_template->assign('title', 'index');
 		$this->_templateFile = 'index.tpl';
 	}
 }

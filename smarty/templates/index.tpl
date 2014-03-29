@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>sipMVC default index</title>
-	</head>
+{include file='head.tpl'}
 	<body>
 		<h1>Welcome to sipMVC!</h1>
 		<p>This is the default <a href="http://sipmvc.mludd.se">sipMVC</a> index page. If you are seeing this page instead of the page you were expecting then please contact the administrator of the website you are attempting to view.</p>

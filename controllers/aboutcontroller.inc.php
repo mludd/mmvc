@@ -35,6 +35,7 @@ class AboutController extends Controller {
 	 * Performs page rendering logic
 	 */
 	protected function indexAction() {
+		$this->_template->assign('title', 'About');
 		$this->_templateFile = 'about.tpl';
 	}
 }
