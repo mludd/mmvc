@@ -75,7 +75,7 @@ class Config extends Model {
 		// controllers
 		$this->routes = [];
 		foreach($routeXml->routes->route as $_cont) {
-			$this->routes[(string)$_cont->path] = $this->xmlControllerToArray($_cont);
+			$this->routes[(string)$_cont->path] = $this->xmlControllerToArray($_cont->controller);
 		}
 
 		// 404
@@ -102,7 +102,6 @@ class Config extends Model {
 	 * @return array
 	 */
 	private function xmlControllerToArray($controller) {
-		error_log(print_r($controller, true));
 		return [
 			'templatefile'	=> (string)$controller->template,
 			'filename'	=> (string)$controller->classfile,

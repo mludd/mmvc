@@ -83,7 +83,7 @@ class Controller {
 	public function __construct($action, $args, $template) {
 		$config = ResourceManager::get('config');
 		$this->_template = $template;
-		$this->_templateFile = $config->controllers[$config->defaultController]['templatefile'];
+		$this->_templateFile = $config->routes[$config->defaultRoute]['templatefile'];
 		$this->_dataType = $config->defaultDatatype;
 		$this->_securityLevel = 0;
 		$this->_action = $action;

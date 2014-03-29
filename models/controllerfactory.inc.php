@@ -51,11 +51,11 @@ class ControllerFactory extends Model {
 		$route = preg_replace('/[^a-zA-Z0-9]/', '', $route);
 
 
-		if(array_key_exists($route, $config->controllers)) {
-			require_once($controllerDir.$config->controllers[$route]['filename']);
+		if(array_key_exists($route, $config->routes)) {
+			require_once($controllerDir.$config->routes[$route]['filename']);
 
-			if(method_exists($config->controllers[$route]['classname'], $action."Action")) {
-				$classname = $config->controllers[$route]['classname'];
+			if(method_exists($config->routes[$route]['classname'], $action."Action")) {
+				$classname = $config->routes[$route]['classname'];
 				$controller = new $classname($action, $args, $smarty);
 			}
 			else {

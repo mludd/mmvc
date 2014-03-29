@@ -43,7 +43,7 @@ $smarty->setConfigDir('smarty/configs/');
 $smarty->setCacheDir('smarty/cache/');
 
 // Filter input
-$route = $config->defaultController;
+$route = $config->defaultRoute;
 $action = 'index';
 if(isset($_GET['controller'])) {
 	$route = preg_replace('/[^a-z0-9]/', '', strtolower($_GET['controller']));

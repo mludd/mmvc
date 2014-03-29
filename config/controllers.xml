@@ -2,7 +2,7 @@
 <config>
 	<!-- defaultController is the default when no other controller is
 	     applicable. -->
-	<defaultRoute>index</defaultController>
+	<defaultRoute>index</defaultRoute>
 	<fileNotFoundController>
 		<controller>
 			<template>404.tpl</template>
