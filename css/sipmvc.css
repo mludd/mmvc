@@ -3,6 +3,19 @@ html {
 	background-color:#fff;
 	color:#333;
 }
+header {
+	text-align:center;
+}
+header img#sipMvcLogo {
+	max-width:33%;
+	display:inline-block;
+	vertical-align:middle;
+}
+header h1 {
+	display:inline-block;
+	font-size:3em;
+	vertical-align:middle;
+}
 body {
 	width:80%;
 	max-width:30em;
