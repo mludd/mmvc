@@ -25,6 +25,7 @@
  * along with sipMVC.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+require_once(dirname(__FILE__)."/functions.php");
 require_once(dirname(__FILE__)."/models/resourcemanager.inc.php");
 require_once(dirname(__FILE__)."/models/controllerfactory.inc.php");
 
