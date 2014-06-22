@@ -24,16 +24,13 @@
  * along with sipMVC.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once(dirname(__FILE__)."/abstract/model.inc.php");
-require_once(dirname(__FILE__)."/config.inc.php");
-
 /**
  * Manages resource singletons, in practice just the db connection,
  * should probably be joined with ControllerFactory
  * @author Mikael Jacobson <mikael@mludd.se>
  * @copyright Copyright (c) 2012-2014 Mikael Jacobson
  */
-class ResourceManager extends Model {
+class Models_ResourceManager extends Models_Abstract_Model {
 	/**
 	 * Database connection singleton
 	 * @var PDO
@@ -55,7 +52,7 @@ class ResourceManager extends Model {
 	 * @return mixed Requested singleton
 	 */
 	public static function get($resource, $options = false) {
-		if (property_exists('ResourceManager', $resource)) {
+		if (property_exists('Models_ResourceManager', $resource)) {
 			if(empty(self::$$resource)) {
 				self::_init_resource($resource, $options);
 			}
@@ -84,6 +81,9 @@ class ResourceManager extends Model {
 			catch(PDOException $pe) {
 				echo "Database connection failed!\n".$pe->getMessage();
 			}
+		}
+		else if($resource === 'config') {
+			self::$config = new Models_Config();
 		}
 		else if(
 			class_exists($resource) &&

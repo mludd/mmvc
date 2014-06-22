@@ -24,14 +24,12 @@
  * along with sipMVC.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once(dirname(__FILE__)."/abstract/model.inc.php");
-
 /**
  * Configuration class
  * @author Mikael Jacobson <mikael@mludd.se>
  * @copyright Copyright (c) 2012-2014 Mikael Jacobson
  */
-class Config extends Model {
+class Models_Config extends Models_Abstract_Model {
 	/**
 	 * Default constructor, loads configuration XML and populates
 	 * the object with the data
@@ -49,6 +47,7 @@ class Config extends Model {
 		$this->locale		= (string)$xml->locale;
 		$this->smartyDir	= (string)$xml->smarty_dir;
 		$this->defaultDatatype	= (string)$xml->default_datatype;
+		$this->appDir		= (string)$xml->app_dir;
 	}
 
 	/**

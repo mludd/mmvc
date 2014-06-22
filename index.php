@@ -26,16 +26,16 @@
  */
 
 require_once(dirname(__FILE__)."/functions.php");
-require_once(dirname(__FILE__)."/models/resourcemanager.inc.php");
-require_once(dirname(__FILE__)."/models/controllerfactory.inc.php");
 
-$config = ResourceManager::get('config');
+$config = Models_ResourceManager::get('config');
 
 setlocale(LC_ALL, $config->locale);
+$cf = new Models_ControllerFactory();
 
 // Smarty setup
 define("SMARTY_DIR", $config->smartyDir);
-require_once(SMARTY_DIR.'Smarty.class.php');
+//require_once(SMARTY_DIR.'Smarty.class.php');
+include(SMARTY_DIR.'Smarty.class.php');
 $smarty = new Smarty();
 $smarty->setTemplateDir('smarty/templates/');
 $smarty->setCompileDir('smarty/templates_c/');
@@ -56,7 +56,6 @@ $args = array();
 if(isset($_GET['args'])) {
 	$args = preg_split('/\//', $_GET['args']);
 }
-
-$controller = ControllerFactory::get($route, $action, $args, $smarty);
+$controller = Models_ControllerFactory::get($route, $action, $args, $smarty);
 $controller->display();
 ?>

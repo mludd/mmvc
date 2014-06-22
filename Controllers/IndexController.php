@@ -1,14 +1,14 @@
 <?php
 /**
- * Contains Model abstract class
- * @license http://sipmvc.mludd.se/COPYING GNU General Public License
+ * Contains IndexController class
  * @package Default
+ * @license http://sipmvc.mludd.se/COPYING GNU General Public License
  */
 
 /*
  * This file is part of The Simple PHP MVC Framework (sipMVC).
  *
- * Copyright (C) 2014 Mikael Jacobson <mikael@mludd.se>
+ * Copyright (C) 2012 Mikael Jacobson <mikael@mludd.se>
  *
  * sipMVC is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,8 +23,19 @@
  * You should have received a copy of the GNU General Public License
  * along with sipMVC.  If not, see <http://www.gnu.org/licenses/>.
  */
-abstract class Model {
-	public function __construct() {
+
+/**
+ * Controller for index page
+ * @author Mikael Jacobson <mikael@mludd.se>
+ * @copyright Copyright (c) 2012 Mikael Jacobson
+ */
+class Controllers_IndexController extends Controllers_Controller {
+	/**
+	 * Performs page rendering logic
+	 */
+	protected function indexAction() {
+		$this->_template->assign('title', 'index');
+		$this->_templateFile = 'index.tpl';
 	}
 }
 ?>

@@ -3,4 +3,5 @@
 	<locale>sv_SE.UTF-8</locale>
 	<smarty_dir>/usr/share/php/smarty3/</smarty_dir>
 	<default_datatype>smarty</default_datatype>
+	<app_dir>/var/www/sites/sipmvc.mludd.se</app_dir>
 </config>

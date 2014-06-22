@@ -23,17 +23,12 @@
  * along with sipMVC.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-//require_once(dirname(__FILE__)."/config.inc.php");
-require_once(dirname(__FILE__)."/abstract/model.inc.php");
-require_once(dirname(__FILE__)."/resourcemanager.inc.php");
-require_once(dirname(__FILE__)."/../controllers/controller.inc.php");
-
 /**
  * Controller factory class
  * @author Mikael Jacobson <mikael@mludd.se>
  * @copyright Copyright (c) 2012-2014 Mikael Jacobson
  */
-class ControllerFactory extends Model {
+class Models_ControllerFactory extends Models_Abstract_Model {
 	/**
 	 * Handles requests for a new controller
 	 * @param string $route Name of route
@@ -43,8 +38,8 @@ class ControllerFactory extends Model {
 	 * @return mixed Controller
 	 */
 	public static function get($route, $action, $args, $smarty) {
-		$config		= ResourceManager::get('config');
-		$controller	= new Controller($action, $args, $smarty);
+		$config		= Models_ResourceManager::get('config');
+		$controller	= new Controllers_Controller($action, $args, $smarty);
 		$controllerDir	= dirname(__FILE__)."/../controllers/";
 
 		// We only allow controller names that are alphanumeric
@@ -52,8 +47,6 @@ class ControllerFactory extends Model {
 
 
 		if(array_key_exists($route, $config->routes)) {
-			require_once($controllerDir.$config->routes[$route]['filename']);
-
 			if(method_exists($config->routes[$route]['classname'], $action."Action")) {
 				$classname = $config->routes[$route]['classname'];
 				$controller = new $classname($action, $args, $smarty);
@@ -62,7 +55,6 @@ class ControllerFactory extends Model {
 				// User is requesting action which does not exist
 				$action = "code";
 				$args = array("404");
-				require_once($controllerDir.$config->fileNotFoundController['filename']);
 				$classname = $config->fileNotFoundController['classname'];
 				$controller = new $classname($action, $args, $smarty);
 			}
@@ -71,7 +63,6 @@ class ControllerFactory extends Model {
 			// User is requesting controller which does not exist
 			$action = "code";
 			$args = array("404");
-			require_once($controllerDir.$config->fileNotFoundController['filename']);
 			$classname = $config->fileNotFoundController['classname'];
 			$controller = new $classname($action, $args, $smarty);
 		}

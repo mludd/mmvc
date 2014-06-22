@@ -24,15 +24,12 @@
  * along with sipMVC.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-//require_once(dirname(__FILE__)."/../models/config.inc.php");
-require_once(dirname(__FILE__)."/../models/resourcemanager.inc.php");
-
 /**
  * Controller base class
  * @author Mikael Jacobson <mikael@mludd.se>
  * @copyright Copyright (c) 2012-2014 Mikael Jacobson
  */
-class Controller {
+class Controllers_Controller {
 	/**
 	 * Smarty template
 	 * @var Smarty
@@ -81,7 +78,7 @@ class Controller {
 	 * @param array $args GET arguments
 	 */
 	public function __construct($action, $args, $template) {
-		$config = ResourceManager::get('config');
+		$config = Models_ResourceManager::get('config');
 		$this->_template = $template;
 		$this->_templateFile = $config->routes[$config->defaultRoute]['templatefile'];
 		$this->_dataType = $config->defaultDatatype;

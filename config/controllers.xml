@@ -6,8 +6,7 @@
 	<fileNotFoundController>
 		<controller>
 			<template>404.tpl</template>
-			<classfile>errorcontroller.inc.php</classfile>
-			<classname>ErrorController</classname>
+			<classname>Controllers_ErrorController</classname>
 		</controller>
 	</fileNotFoundController>
 	<routes>
@@ -15,24 +14,21 @@
 			<path>index</path>
 			<controller>
 				<template>index.tpl</template>
-				<classfile>indexcontroller.inc.php</classfile>
-				<classname>IndexController</classname>
+				<classname>Controllers_IndexController</classname>
 			</controller>
 		</route>
 		<route>
 			<path>about</path>
 			<controller>
 				<template>about.tpl</template>
-				<classfile>aboutcontroller.inc.php</classfile>
-				<classname>AboutController</classname>
+				<classname>Controllers_AboutController</classname>
 			</controller>
 		</route>
 		<route>
 			<path>error</path>
 			<controller>
 				<template>404.tpl</template>
-				<classfile>errorcontroller.inc.php</classfile>
-				<classname>ErrorController</classname>
+				<classname>Controllers_ErrorController</classname>
 			</controller>
 		</route>
 	</routes>

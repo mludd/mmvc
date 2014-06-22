@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains FileNotFoundController class
+ * Contains AboutController class
  * @package Default
  * @license http://sipmvc.mludd.se/COPYING GNU General Public License
  */
@@ -24,41 +24,18 @@
  * along with sipMVC.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once(dirname(__FILE__)."/controller.inc.php");
-
 /**
- * Default error controller, called when a controller can't be found.
- * Returns a 404 error. 
+ * Controller for index page
  * @author Mikael Jacobson <mikael@mludd.se>
+ * @copyright Copyright (c) 2012 Mikael Jacobson
  */
-class ErrorController extends Controller {
+class Controllers_AboutController extends Controllers_Controller {
 	/**
-	 * Handles page display logic
+	 * Performs page rendering logic
 	 */
 	protected function indexAction() {
-		$this->codeAction();
-	}
-
-	public function codeAction() {
-		$code = "500";
-		$title = "Unknown error";
-		if(isset($this->_args[0]) && is_numeric($this->_args[0])) {
-			if($this->_args[0] == "403") {
-				$code = "403";
-				$title = "403 / Forbidden";
-			}
-			else if($this->_args[0] == "404") {
-				$code = "404";
-				$title = "404 / File not found";
-			}
-			else if($this->_args[0] == "500") {
-				$code = "500";
-				$title = "500 / Internal server error";
-			}
-		}
-		http_response_code($code);
-		$this->_template->assign('title', $title);
-		$this->_templateFile = $code.'.tpl';
+		$this->_template->assign('title', 'About');
+		$this->_templateFile = 'about.tpl';
 	}
 }
 ?>
