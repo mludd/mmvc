@@ -42,8 +42,9 @@ class Models_ControllerFactory extends Models_Abstract_Model {
 		$controller	= new Controllers_Controller($action, $args, $smarty);
 		$controllerDir	= dirname(__FILE__)."/../controllers/";
 
-		// We only allow controller names that are alphanumeric
+		// We only allow controller and action names that are alphanumeric
 		$route = preg_replace('/[^a-zA-Z0-9]/', '', $route);
+		$action = preg_replace('/[^a-zA-Z0-9]/', '', $action);
 
 
 		if(array_key_exists($route, $config->routes)) {
