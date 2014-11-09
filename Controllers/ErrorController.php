@@ -40,16 +40,16 @@ class Controllers_ErrorController extends Controllers_Controller {
 	public function codeAction() {
 		$code = "500";
 		$title = "Unknown error";
-		if(isset($this->_args[0]) && is_numeric($this->_args[0])) {
-			if($this->_args[0] == "403") {
+		if(isset($this->_args['code']) && is_numeric($this->_args['code'])) {
+			if($this->_args['code'] == "403") {
 				$code = "403";
 				$title = "403 / Forbidden";
 			}
-			else if($this->_args[0] == "404") {
+			else if($this->_args['code'] == "404") {
 				$code = "404";
 				$title = "404 / File not found";
 			}
-			else if($this->_args[0] == "500") {
+			else if($this->_args['code'] == "500") {
 				$code = "500";
 				$title = "500 / Internal server error";
 			}

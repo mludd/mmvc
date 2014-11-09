@@ -1,8 +1,8 @@
 RewriteEngine On
 
-ErrorDocument 403 /error/code/403
-ErrorDocument 404 /error/code/404
-ErrorDocument 500 /error/code/500
+ErrorDocument 403 /error/code/code/403
+ErrorDocument 404 /error/code/code/404
+ErrorDocument 500 /error/code/code/500
 
 # Remove trailing slashes
 RewriteCond %{SCRIPT_FILENAME} !-d
