@@ -54,7 +54,8 @@ if(isset($_GET['action']) && !empty($_GET['action'])) {
 
 $args = array();
 if(isset($_GET['args'])) {
-	$args = preg_split('/\//', $_GET['args']);
+	list($k, $v) = explode('/', $_GET['args']);
+	$args[$k] = $v;
 }
 $controller = Models_ControllerFactory::get($route, $action, $args, $smarty);
 $controller->display();
