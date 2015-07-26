@@ -55,7 +55,7 @@ class Models_ControllerFactory extends Models_Abstract_Model {
 			else {
 				// User is requesting action which does not exist
 				$action = "code";
-				$args = array("404");
+				$args = array("code" => "404");
 				$classname = $config->fileNotFoundController['classname'];
 				$controller = new $classname($action, $args, $smarty);
 			}
@@ -63,7 +63,7 @@ class Models_ControllerFactory extends Models_Abstract_Model {
 		else {
 			// User is requesting controller which does not exist
 			$action = "code";
-			$args = array("404");
+			$args = array("code" => "404");
 			$classname = $config->fileNotFoundController['classname'];
 			$controller = new $classname($action, $args, $smarty);
 		}
