@@ -1,13 +1,12 @@
-The Simple PHP MVC Framework (sipMVC) README
+# The Simple PHP MVC Framework (sipMVC)
 
-1. What is this?
-----------------
+## What is this?
 
 sipMVC is a simple PHP-based MVC framework.
 
 
-2. Structure
-----------------
+## Structure
+
 
 /config:
     Contains all configuration files. The configuration is stored in XML
@@ -25,8 +24,7 @@ sipMVC is a simple PHP-based MVC framework.
     - Included Smarty installation
 
 
-2b. URL and controller anatomy
-----------------
+### URL and controller anatomy
 
 A normal URL to a view in sipMVC looks something like this:
 http://example.com/controller/action/arguments
@@ -40,8 +38,7 @@ methods accordingly. That is, the name of your method should be the name
 of your action followed by 'Action'.
 
 
-2c. Models
-----------------
+### Models
 
 Models in sipMVC are fairly barebones, while there is an abstract parent
 'Model' class it currently contains nothing of value, at all.
@@ -57,8 +54,7 @@ ResourceManager:
     extended to handle other things.
 
 
-3. Building your own sites
-----------------
+## Building your own sites
 
 sipMVC is of course meant to be used to quickly deploy your own sites.
 
