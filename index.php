@@ -1,9 +1,10 @@
 <?php
+
 /**
- * Dispatcher for sipMVC MVC Framework
+ * Dispatcher for sipMVC MVC Framework.
+ *
  * @author Mikael Jacobson <mikael@mludd.se>
  * @license http://s.mludd.se/COPYING GNU General Public License
- * @package Default
  */
 
 /*
@@ -25,7 +26,7 @@
  * along with sipMVC.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once(dirname(__FILE__)."/functions.php");
+require_once dirname(__FILE__).'/functions.php';
 
 $config = Models_ResourceManager::get('config');
 
@@ -33,9 +34,9 @@ setlocale(LC_ALL, $config->locale);
 $cf = new Models_ControllerFactory();
 
 // Smarty setup
-define("SMARTY_DIR", $config->smartyDir);
+define('SMARTY_DIR', $config->smartyDir);
 //require_once(SMARTY_DIR.'Smarty.class.php');
-include(SMARTY_DIR.'Smarty.class.php');
+include SMARTY_DIR.'Smarty.class.php';
 $smarty = new Smarty();
 $smarty->setTemplateDir('smarty/templates/');
 $smarty->setCompileDir('smarty/templates_c/');
@@ -45,18 +46,18 @@ $smarty->setCacheDir('smarty/cache/');
 // Filter input
 $route = $config->defaultRoute;
 $action = 'index';
-if(isset($_GET['controller'])) {
-	$route = preg_replace('/[^a-z0-9]/', '', strtolower($_GET['controller']));
+if (isset($_GET['controller'])) {
+    $route = preg_replace('/[^a-z0-9]/', '', strtolower($_GET['controller']));
 }
-if(isset($_GET['action']) && !empty($_GET['action'])) {
-	$action = preg_replace('/[^a-zA-Z0-9]/', '', $_GET['action']);
+if (isset($_GET['action']) && !empty($_GET['action'])) {
+    $action = preg_replace('/[^a-zA-Z0-9]/', '', $_GET['action']);
 }
 
 $args = array();
-if(isset($_GET['args'])) {
-	list($k, $v) = explode('/', $_GET['args']);
-	$args[$k] = $v;
+if (!empty($_GET['args']) && isset($_GET['args'])) {
+    preg_match_all('/([^\/]+)\/([^\/]+)/', $_GET['args'], $arr);
+    $args = array_combine($arr[1], $arr[2]);
 }
+
 $controller = Models_ControllerFactory::get($route, $action, $args, $smarty);
 $controller->display();
-?>
