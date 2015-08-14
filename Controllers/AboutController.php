@@ -1,7 +1,8 @@
 <?php
+
 /**
- * Contains AboutController class
- * @package Default
+ * Contains AboutController class.
+ *
  * @license http://sipmvc.mludd.se/COPYING GNU General Public License
  */
 
@@ -25,17 +26,19 @@
  */
 
 /**
- * Controller for index page
+ * Controller for index page.
+ *
  * @author Mikael Jacobson <mikael@mludd.se>
  * @copyright Copyright (c) 2012 Mikael Jacobson
  */
-class Controllers_AboutController extends Controllers_Controller {
-	/**
-	 * Performs page rendering logic
-	 */
-	protected function indexAction() {
-		$this->_template->assign('title', 'About');
-		$this->_templateFile = 'about.tpl';
-	}
+class Controllers_AboutController extends Controllers_Controller
+{
+    /**
+     * Performs page rendering logic.
+     */
+    protected function indexAction()
+    {
+        $this->_template->assign('title', 'About');
+        $this->_templateFile = 'about.tpl';
+    }
 }
-?>

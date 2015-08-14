@@ -1,8 +1,9 @@
 <?php
+
 /**
- * Contains Model abstract class
+ * Contains Model abstract class.
+ *
  * @license http://sipmvc.mludd.se/COPYING GNU General Public License
- * @package Default
  */
 
 /*
@@ -23,8 +24,9 @@
  * You should have received a copy of the GNU General Public License
  * along with sipMVC.  If not, see <http://www.gnu.org/licenses/>.
  */
-abstract class Models_Abstract_Model {
-	public function __construct() {
-	}
+abstract class Models_Abstract_Model
+{
+    public function __construct()
+    {
+    }
 }
-?>

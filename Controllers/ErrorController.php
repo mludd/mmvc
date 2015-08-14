@@ -1,7 +1,8 @@
 <?php
+
 /**
- * Contains FileNotFoundController class
- * @package Default
+ * Contains FileNotFoundController class.
+ *
  * @license http://sipmvc.mludd.se/COPYING GNU General Public License
  */
 
@@ -26,37 +27,38 @@
 
 /**
  * Default error controller, called when a controller can't be found.
- * Returns a 404 error. 
+ * Returns a 404 error.
+ *
  * @author Mikael Jacobson <mikael@mludd.se>
  */
-class Controllers_ErrorController extends Controllers_Controller {
-	/**
-	 * Handles page display logic
-	 */
-	protected function indexAction() {
-		$this->codeAction();
-	}
+class Controllers_ErrorController extends Controllers_Controller
+{
+    /**
+     * Handles page display logic.
+     */
+    protected function indexAction()
+    {
+        $this->codeAction();
+    }
 
-	public function codeAction() {
-		$code = "500";
-		$title = "Unknown error";
-		if(isset($this->_args['code']) && is_numeric($this->_args['code'])) {
-			if($this->_args['code'] == "403") {
-				$code = "403";
-				$title = "403 / Forbidden";
-			}
-			else if($this->_args['code'] == "404") {
-				$code = "404";
-				$title = "404 / File not found";
-			}
-			else if($this->_args['code'] == "500") {
-				$code = "500";
-				$title = "500 / Internal server error";
-			}
-		}
-		http_response_code($code);
-		$this->_template->assign('title', $title);
-		$this->_templateFile = $code.'.tpl';
-	}
+    public function codeAction()
+    {
+        $code = '500';
+        $title = 'Unknown error';
+        if (isset($this->_args['code']) && is_numeric($this->_args['code'])) {
+            if ($this->_args['code'] == '403') {
+                $code = '403';
+                $title = '403 / Forbidden';
+            } elseif ($this->_args['code'] == '404') {
+                $code = '404';
+                $title = '404 / File not found';
+            } elseif ($this->_args['code'] == '500') {
+                $code = '500';
+                $title = '500 / Internal server error';
+            }
+        }
+        http_response_code($code);
+        $this->_template->assign('title', $title);
+        $this->_templateFile = $code.'.tpl';
+    }
 }
-?>

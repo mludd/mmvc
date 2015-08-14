@@ -1,7 +1,8 @@
 <?php
+
 /**
- * Contains Controller base class
- * @package Default
+ * Contains Controller base class.
+ *
  * @license http://sipmvc.mludd.se/COPYING GNU General Public License
  */
 
@@ -25,107 +26,113 @@
  */
 
 /**
- * Controller base class
+ * Controller base class.
+ *
  * @author Mikael Jacobson <mikael@mludd.se>
  * @copyright Copyright (c) 2012-2014 Mikael Jacobson
  */
-class Controllers_Controller {
-	/**
-	 * Smarty template
-	 * @var Smarty
-	 * @access protected
-	 */
-	protected $_template;
+class Controllers_Controller
+{
+    /**
+     * Smarty template.
+     *
+     * @var Smarty
+     */
+    protected $_template;
 
-	/**
-	 * Name of Smarty template file to use
-	 * @var string
-	 * @access protected
-	 */
-	protected $_templateFile;
+    /**
+     * Name of Smarty template file to use.
+     *
+     * @var string
+     */
+    protected $_templateFile;
 
-	/**
-	 * Data format for output, 'json' or 'smarty'
-	 * @var string
-	 * @access protected
-	 */
-	protected $_dataType;
+    /**
+     * Data format for output, 'json' or 'smarty'.
+     *
+     * @var string
+     */
+    protected $_dataType;
 
-	/**
-	 * Security level, UNUSED
-	 * @var int
-	 * @access protected
-	 */
-	protected $_securityLevel;
+    /**
+     * Security level, UNUSED.
+     *
+     * @var int
+     */
+    protected $_securityLevel;
 
-	/**
-	 * Controller action
-	 * @var string
-	 * @access protected
-	 */
-	protected $_action;
+    /**
+     * Controller action.
+     *
+     * @var string
+     */
+    protected $_action;
 
-	/**
-	 * GET arguments
-	 * @var array
-	 * @access protected
-	 */
-	protected $_args;
+    /**
+     * GET arguments.
+     *
+     * @var array
+     */
+    protected $_args;
 
-	/**
-	 * Default constructor
-	 * @param Smarty $template Smarty template object
-	 * @param array $args GET arguments
-	 */
-	public function __construct($action, $args, $template) {
-		$config = Models_ResourceManager::get('config');
-		$this->_template = $template;
-		$this->_templateFile = $config->routes[$config->defaultRoute]['templatefile'];
-		$this->_dataType = $config->defaultDatatype;
-		$this->_securityLevel = 0;
-		$this->_action = $action;
-		$this->_args = $args;
-	}
+    /**
+     * Default constructor.
+     *
+     * @param Smarty $template Smarty template object
+     * @param array  $args     GET arguments
+     */
+    public function __construct($action, $args, $template)
+    {
+        $config = Models_ResourceManager::get('config');
+        $this->_template = $template;
+        $this->_templateFile = $config->routes[$config->defaultRoute]['templatefile'];
+        $this->_dataType = $config->defaultDatatype;
+        $this->_securityLevel = 0;
+        $this->_action = $action;
+        $this->_args = $args;
+    }
 
-	/**
-	 * This is the main function that processes input and sets all
-	 * properties for the smarty template.
-	 * @param string $action Action to run
-	 */
-	protected function process($action) {
-		$methodName = $action."Action";
-		$this->{$methodName}();
-	}
+    /**
+     * This is the main function that processes input and sets all
+     * properties for the smarty template.
+     *
+     * @param string $action Action to run
+     */
+    protected function process($action)
+    {
+        $methodName = $action.'Action';
+        $this->{$methodName}();
+    }
 
-	/**
-	 * Displays the view
-	 * @param string $action Action to run before outputting.
-	 */
-	public function display() {
-		$this->process($this->_action);
-		if($this->_dataType == "smarty") {
-			$this->_template->display($this->_templateFile);
-		}
-		else if($this->_dataType == "json") {
-			echo $this->displayJSON();
-		}
-	}
+    /**
+     * Displays the view.
+     *
+     * @param string $action Action to run before outputting.
+     */
+    public function display()
+    {
+        $this->process($this->_action);
+        if ($this->_dataType == 'smarty') {
+            $this->_template->display($this->_templateFile);
+        } elseif ($this->_dataType == 'json') {
+            echo $this->displayJSON();
+        }
+    }
 
-	/**
-	 * Outputs all the data from $this->_template as a JSON response
-	 */
-	private function displayJSON() {
-		$vars = array();
-		if(method_exists($this->_template, 'get_template_vars')) {
-			$vars = $this->_template->get_template_vars();
-		}
-		else {
-			foreach($this->_template->tpl_vars AS $key => $value) {
-				$vars[$key] = $value;
-			}
-		}
-		//$vars->unset('SCRIPT_NAME');
-		echo json_encode($vars);
-	}
+    /**
+     * Outputs all the data from $this->_template as a JSON response.
+     */
+    private function displayJSON()
+    {
+        $vars = array();
+        if (method_exists($this->_template, 'get_template_vars')) {
+            $vars = $this->_template->get_template_vars();
+        } else {
+            foreach ($this->_template->tpl_vars as $key => $value) {
+                $vars[$key] = $value;
+            }
+        }
+        //$vars->unset('SCRIPT_NAME');
+        echo json_encode($vars);
+    }
 }
-?>

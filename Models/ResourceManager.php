@@ -1,8 +1,9 @@
 <?php
+
 /**
- * Contains ResourceManager class
+ * Contains ResourceManager class.
+ *
  * @license http://sipmvc.mludd.se/COPYING GNU General Public License
- * @package Default
  */
 
 /*
@@ -26,70 +27,74 @@
 
 /**
  * Manages resource singletons, in practice just the db connection,
- * should probably be joined with ControllerFactory
+ * should probably be joined with ControllerFactory.
+ *
  * @author Mikael Jacobson <mikael@mludd.se>
  * @copyright Copyright (c) 2012-2014 Mikael Jacobson
  */
-class Models_ResourceManager extends Models_Abstract_Model {
-	/**
-	 * Database connection singleton
-	 * @var PDO
-	 * @access private
-	 */
-	private static $db;
+class Models_ResourceManager extends Models_Abstract_Model
+{
+    /**
+     * Database connection singleton.
+     *
+     * @var PDO
+     */
+    private static $db;
 
-	/**
-	 * Config
-	 * @var mixed
-	 * @access private
-	 */
-	private static $config;
+    /**
+     * Config.
+     *
+     * @var mixed
+     */
+    private static $config;
 
-	/**
-	 * Fetches a singleton
-	 * @param string $resource Name of resource to fetch
-	 * @param mixed $options
-	 * @return mixed Requested singleton
-	 */
-	public static function get($resource, $options = false) {
-		if (property_exists('Models_ResourceManager', $resource)) {
-			if(empty(self::$$resource)) {
-				self::_init_resource($resource, $options);
-			}
-			if(!empty(self::$$resource)) {
-				return self::$$resource;
-			}
-		}
-		return null;
-	}
+    /**
+     * Fetches a singleton.
+     *
+     * @param string $resource Name of resource to fetch
+     * @param mixed  $options
+     *
+     * @return mixed Requested singleton
+     */
+    public static function get($resource, $options = false)
+    {
+        if (property_exists('Models_ResourceManager', $resource)) {
+            if (empty(self::$$resource)) {
+                self::_init_resource($resource, $options);
+            }
+            if (!empty(self::$$resource)) {
+                return self::$$resource;
+            }
+        }
 
-	/**
-	 * Initializes a requested resource
-	 * @param string $resource Name of requested resource
-	 * @param mixed $options
-	 */
-	private static function _init_resource($resource, $options = null) {
-		if($resource === 'db') {
-			$config = self::get('config');
-			try {
-				self::$db = new PDO(
-					$config->dbDsn,
-					$config->dbUser,
-					$config->dbPass	
-				);
-			}
-			catch(PDOException $pe) {
-				echo "Database connection failed!\n".$pe->getMessage();
-			}
-		}
-		else if($resource === 'config') {
-			self::$config = new Models_Config();
-		}
-		else if(
-			class_exists($resource) &&
-			property_exists('ResourceManager', $resource)) {
-				self::$$resource = new $resource($options);
-		}
-	}
+        return;
+    }
+
+    /**
+     * Initializes a requested resource.
+     *
+     * @param string $resource Name of requested resource
+     * @param mixed  $options
+     */
+    private static function _init_resource($resource, $options = null)
+    {
+        if ($resource === 'db') {
+            $config = self::get('config');
+            try {
+                self::$db = new PDO(
+                    $config->dbDsn,
+                    $config->dbUser,
+                    $config->dbPass
+                );
+            } catch (PDOException $pe) {
+                echo "Database connection failed!\n".$pe->getMessage();
+            }
+        } elseif ($resource === 'config') {
+            self::$config = new Models_Config();
+        } elseif (
+            class_exists($resource) &&
+            property_exists('ResourceManager', $resource)) {
+            self::$$resource = new $resource($options);
+        }
+    }
 }
-?>

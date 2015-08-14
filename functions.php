@@ -1,9 +1,10 @@
 <?php
+
 /**
- * Global functions for sipMVC MVC Framework
+ * Global functions for sipMVC MVC Framework.
+ *
  * @author Mikael Jacobson <mikael@mludd.se>
  * @license http://s.mludd.se/COPYING GNU General Public License
- * @package Default
  */
 
 /*
@@ -26,26 +27,27 @@
  */
 
 /**
- * Extended ucwords
+ * Extended ucwords.
  */
-function uc_words($string, $newSeparator='_', $oldSeparator='_') {
-	return str_replace(' ', $newSeparator, ucwords(str_replace($oldSeparator, ' ', $string)));
+function uc_words($string, $newSeparator = '_', $oldSeparator = '_')
+{
+    return str_replace(' ', $newSeparator, ucwords(str_replace($oldSeparator, ' ', $string)));
 }
 
-/**
+/*
  * Autoloader
  */
 //function __autoload($class) {
-spl_autoload_register(function($class) {
-	// Class name is DirectoryPrefix_OtherDir_ClassName
-	$exploded = explode('_', $class);
-	$path = dirname(__FILE__) . DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, $exploded) . '.php';
-	if(is_file($path)) {
-		include($path);
-		if(!class_exists($class)) {
-			throw new Exception("Class '".$class."' not found in '".$path."'.");
-		}
-	}
+spl_autoload_register(function ($class) {
+    // Class name is DirectoryPrefix_OtherDir_ClassName
+    $exploded = explode('_', $class);
+    $path = dirname(__FILE__).DIRECTORY_SEPARATOR.implode(DIRECTORY_SEPARATOR, $exploded).'.php';
+    if (is_file($path)) {
+        include $path;
+        if (!class_exists($class)) {
+            throw new Exception("Class '".$class."' not found in '".$path."'.");
+        }
+    }
 });
 //}
-?>
+;

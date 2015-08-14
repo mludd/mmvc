@@ -1,7 +1,8 @@
 <?php
+
 /**
- * Contains IndexController class
- * @package Default
+ * Contains IndexController class.
+ *
  * @license http://sipmvc.mludd.se/COPYING GNU General Public License
  */
 
@@ -25,17 +26,19 @@
  */
 
 /**
- * Controller for index page
+ * Controller for index page.
+ *
  * @author Mikael Jacobson <mikael@mludd.se>
  * @copyright Copyright (c) 2012 Mikael Jacobson
  */
-class Controllers_IndexController extends Controllers_Controller {
-	/**
-	 * Performs page rendering logic
-	 */
-	protected function indexAction() {
-		$this->_template->assign('title', 'index');
-		$this->_templateFile = 'index.tpl';
-	}
+class Controllers_IndexController extends Controllers_Controller
+{
+    /**
+     * Performs page rendering logic.
+     */
+    protected function indexAction()
+    {
+        $this->_template->assign('title', 'index');
+        $this->_templateFile = 'index.tpl';
+    }
 }
-?>
