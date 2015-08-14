@@ -27,6 +27,9 @@ If you want to add other actions to your controllers you just name the
 methods accordingly. That is, the name of your method should be the name
 of your action followed by `Action`.
 
+To access arguments you can use the `Controllers_Controller::getArg($argument)`
+method.
+
 
 ### Models
 

@@ -79,7 +79,7 @@ class Controllers_Controller
      * Default constructor.
      *
      * @param Smarty $template Smarty template object
-     * @param array  $args     GET arguments
+     * @param array $args GET arguments
      */
     public function __construct($action, $args, $template)
     {
@@ -116,6 +116,23 @@ class Controllers_Controller
             $this->_template->display($this->_templateFile);
         } elseif ($this->_dataType == 'json') {
             echo $this->displayJSON();
+        }
+    }
+
+    /**
+     * Returns the value of an argument or false if the argument doesn't exist.
+     *
+     * @param string $argument Argument name
+     * @return mixed Argument value
+     */
+    public function getArg($argument)
+    {
+        if (array_key_exists($argument, $this->_args)) {
+            if (!empty($this->_args[$argument])) {
+                return $this->_args[$argument];
+            } else {
+                return false;
+            }
         }
     }
 
