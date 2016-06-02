@@ -79,7 +79,7 @@ class Controllers_Controller
      * Default constructor.
      *
      * @param Smarty $template Smarty template object
-     * @param array $args GET arguments
+     * @param array  $args     GET arguments
      */
     public function __construct($action, $args, $template)
     {
@@ -123,6 +123,7 @@ class Controllers_Controller
      * Returns the value of an argument or false if the argument doesn't exist.
      *
      * @param string $argument Argument name
+     *
      * @return mixed Argument value
      */
     public function getArg($argument)
